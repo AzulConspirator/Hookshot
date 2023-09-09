@@ -72,7 +72,7 @@ public class HookshotEntity extends PersistentProjectileEntity {
 		super.tick();
 
 		if(getOwner() instanceof PlayerEntity owner) {
-			if(isPulling && age % 2 == 0)
+			if(isPulling && owner.distanceTo(this) > 3D && age % 2 == 0)
 				world.playSound(null, getOwner().getBlockPos(), ModSoundEvents.HOOKSHOT_REEL, SoundCategory.PLAYERS, 1F, 1F);
 
 			if(!world.isClient) {
