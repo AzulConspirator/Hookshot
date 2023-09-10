@@ -4,7 +4,6 @@ import dev.cammiescorner.hookshot.Hookshot;
 import dev.cammiescorner.hookshot.common.item.HookshotItem;
 import dev.cammiescorner.hookshot.core.integration.HookshotConfig;
 import dev.cammiescorner.hookshot.core.registry.ModDamageTypes;
-//import dev.cammiescorner.hookshot.core.registry.ModDamageSource;
 import dev.cammiescorner.hookshot.core.registry.ModEntities;
 import dev.cammiescorner.hookshot.core.registry.ModSoundEvents;
 import dev.cammiescorner.hookshot.core.util.PlayerProperties;

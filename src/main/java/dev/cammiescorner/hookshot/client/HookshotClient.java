@@ -4,8 +4,6 @@ import dev.cammiescorner.hookshot.Hookshot;
 import dev.cammiescorner.hookshot.client.entity.model.HookshotEntityModel;
 import dev.cammiescorner.hookshot.client.entity.renderer.HookshotEntityRenderer;
 import dev.cammiescorner.hookshot.core.registry.ModEntities;
-import dev.cammiescorner.hookshot.core.util.ColourHelper;
-import dev.cammiescorner.hookshot.core.util.Dyeable;
 import dev.cammiescorner.hookshot.core.util.PlayerProperties;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -33,7 +31,6 @@ public class HookshotClient implements ClientModInitializer {
 
 		// Colour Registry
 		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> getcolor(stack, tintIndex),HOOKSHOT_TOOL);
-		//ColorProviderRegistry.ITEM.register((stack, tintIndex) -> ColourHelper.dyeableToDecimal((Dyeable) stack.getItem()), WHITE_HOOKSHOT, ORANGE_HOOKSHOT, MAGENTA_HOOKSHOT, LIGHT_BLUE_HOOKSHOT, YELLOW_HOOKSHOT, LIME_HOOKSHOT, PINK_HOOKSHOT, GREY_HOOKSHOT, LIGHT_GREY_HOOKSHOT, CYAN_HOOKSHOT, PURPLE_HOOKSHOT, BLUE_HOOKSHOT, BROWN_HOOKSHOT, GREEN_HOOKSHOT, RED_HOOKSHOT, BLACK_HOOKSHOT);
 
 		// Predicate Registry
 		ModelPredicateProviderRegistry.register(new Identifier(Hookshot.MOD_ID, "has_hook"), (stack, world, entity, seed) -> {

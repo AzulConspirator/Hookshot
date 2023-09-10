@@ -4,7 +4,6 @@ import dev.cammiescorner.hookshot.Hookshot;
 import dev.cammiescorner.hookshot.common.entity.HookshotEntity;
 import dev.cammiescorner.hookshot.core.integration.HookshotConfig;
 import dev.cammiescorner.hookshot.core.registry.ModEntities;
-import dev.cammiescorner.hookshot.core.util.Dyeable;
 import dev.cammiescorner.hookshot.core.util.PlayerProperties;
 import dev.cammiescorner.hookshot.core.util.UpgradesHelper;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
