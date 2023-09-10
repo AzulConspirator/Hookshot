@@ -16,6 +16,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
 import static dev.cammiescorner.hookshot.core.registry.ModItems.*;
@@ -31,7 +32,8 @@ public class HookshotClient implements ClientModInitializer {
 		EntityModelLayerRegistry.registerModelLayer(HOOKSHOT, HookshotEntityModel::getTexturedModelData);
 
 		// Colour Registry
-		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> ColourHelper.dyeableToDecimal((Dyeable) stack.getItem()), WHITE_HOOKSHOT, ORANGE_HOOKSHOT, MAGENTA_HOOKSHOT, LIGHT_BLUE_HOOKSHOT, YELLOW_HOOKSHOT, LIME_HOOKSHOT, PINK_HOOKSHOT, GREY_HOOKSHOT, LIGHT_GREY_HOOKSHOT, CYAN_HOOKSHOT, PURPLE_HOOKSHOT, BLUE_HOOKSHOT, BROWN_HOOKSHOT, GREEN_HOOKSHOT, RED_HOOKSHOT, BLACK_HOOKSHOT);
+		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> getcolor(stack, tintIndex),HOOKSHOT_TOOL);
+		//ColorProviderRegistry.ITEM.register((stack, tintIndex) -> ColourHelper.dyeableToDecimal((Dyeable) stack.getItem()), WHITE_HOOKSHOT, ORANGE_HOOKSHOT, MAGENTA_HOOKSHOT, LIGHT_BLUE_HOOKSHOT, YELLOW_HOOKSHOT, LIME_HOOKSHOT, PINK_HOOKSHOT, GREY_HOOKSHOT, LIGHT_GREY_HOOKSHOT, CYAN_HOOKSHOT, PURPLE_HOOKSHOT, BLUE_HOOKSHOT, BROWN_HOOKSHOT, GREEN_HOOKSHOT, RED_HOOKSHOT, BLACK_HOOKSHOT);
 
 		// Predicate Registry
 		ModelPredicateProviderRegistry.register(new Identifier(Hookshot.MOD_ID, "has_hook"), (stack, world, entity, seed) -> {
@@ -44,5 +46,16 @@ public class HookshotClient implements ClientModInitializer {
 
 			return 0;
 		});
+	}
+	private int getcolor(ItemStack stack, int tintIndex)
+	{
+		int colorvalue;
+		//float[] rgb = {255f,255f,255f};
+		if (tintIndex == 0 && stack.getSubNbt("display") != null)
+		{
+			colorvalue = stack.getOrCreateSubNbt("display").getInt("color");
+			return colorvalue != 0 ? colorvalue:-1;
+		}
+		return -1;
 	}
 }

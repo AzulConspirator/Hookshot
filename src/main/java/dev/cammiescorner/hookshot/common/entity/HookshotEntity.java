@@ -14,7 +14,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonPart;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -39,6 +38,7 @@ public class HookshotEntity extends PersistentProjectileEntity {
 	private double maxRange = 0D;
 	private double maxSpeed = 0D;
 	private boolean isPulling = false;
+	private int color = 16777215;
 	private Entity hookedEntity;
 	private ItemStack stack;
 
@@ -169,8 +169,13 @@ public class HookshotEntity extends PersistentProjectileEntity {
 	}
 
 	@Override
-	protected ItemStack asItemStack() {
+	public ItemStack asItemStack() {
 		return ItemStack.EMPTY;
+	}
+
+	
+	public int getcolor() {
+		return color;
 	}
 
 	@Override
@@ -246,6 +251,7 @@ public class HookshotEntity extends PersistentProjectileEntity {
 		maxRange = tag.getDouble("maxRange");
 		maxSpeed = tag.getDouble("maxSpeed");
 		isPulling = tag.getBoolean("isPulling");
+		color = tag.getInt("color");
 		stack = ItemStack.fromNbt(tag.getCompound("hookshotItem"));
 
 		if(world.getEntityById(tag.getInt("owner")) instanceof PlayerEntity owner)
@@ -258,6 +264,8 @@ public class HookshotEntity extends PersistentProjectileEntity {
 		tag.putDouble("maxRange", maxRange);
 		tag.putDouble("maxSpeed", maxSpeed);
 		tag.putBoolean("isPulling", isPulling);
+		tag.putInt("color", color);
+
 		tag.put("hookshotItem", stack.writeNbt(new NbtCompound()));
 
 		if(getOwner() instanceof PlayerEntity owner)

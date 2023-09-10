@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.DyeableItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
@@ -23,19 +24,18 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class HookshotItem extends Item implements Dyeable {
-	private final DyeColor colour;
+public class HookshotItem extends Item implements DyeableItem 
+{	
+	public static final int DEFAULT_COLOR = 16777215;
 
-	public HookshotItem(DyeColor colour) {
+	public HookshotItem() {
 		super(new Item.Settings().maxCount(1).maxDamage(HookshotConfig.defaultMaxDurability));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(this));
-		this.colour = colour;
 	}
 
 	@Override
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
 		ItemStack stack = user.getStackInHand(hand);
-
 		if(!world.isClient) {
 			if(!((PlayerProperties) user).hasHook()) {
 				double maxRange = HookshotConfig.defaultMaxRange * (UpgradesHelper.hasRangeUpgrade(stack) ? HookshotConfig.rangeMultiplier : 1);
@@ -115,10 +115,5 @@ public class HookshotItem extends Item implements Dyeable {
 		boolean hasModifiers = UpgradesHelper.hasAquaticUpgrade(stack) || UpgradesHelper.hasEndericUpgrade(stack) || UpgradesHelper.hasQuickUpgrade(stack) || UpgradesHelper.hasRangeUpgrade(stack) || UpgradesHelper.hasAutomaticUpgrade(stack) || UpgradesHelper.hasBleedUpgrade(stack) || UpgradesHelper.hasSwingingUpgrade(stack) || UpgradesHelper.hasDurabilityUpgrade(stack);
 
 		return hasModifiers ? super.getName(stack).copy().formatted(Formatting.AQUA) : super.getName(stack);
-	}
-
-	@Override
-	public DyeColor getColour() {
-		return colour;
 	}
 }

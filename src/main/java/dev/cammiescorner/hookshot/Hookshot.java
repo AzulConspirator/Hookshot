@@ -4,7 +4,6 @@ import dev.cammiescorner.hookshot.core.integration.HookshotConfig;
 import dev.cammiescorner.hookshot.core.registry.ModEntities;
 import dev.cammiescorner.hookshot.core.registry.ModItems;
 import dev.cammiescorner.hookshot.core.registry.ModSoundEvents;
-import dev.cammiescorner.hookshot.core.util.recipe.HookshotShapelessRecipe;
 import dev.cammiescorner.hookshot.core.util.recipe.HookshotSmithingRecipe;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
@@ -32,7 +31,7 @@ public class Hookshot implements ModInitializer {
 
 		// Recipes
 		Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(MOD_ID, "smithing"), new HookshotSmithingRecipe.Serializer());
-		Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(MOD_ID, "crafting_shapeless"), new HookshotShapelessRecipe.Serializer());
+		//Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(MOD_ID, "crafting_shapeless"), new HookshotShapelessRecipe.Serializer());
 	}
 
 	public static class DataTrackers {
