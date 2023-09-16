@@ -8,7 +8,7 @@
 # VsCode
 .vscode/
 bin/
-
+*.k
 # IntelliJ
 out/
 # mpeltonen/sbt-idea plugin

@@ -107,6 +107,8 @@ public class HookshotItem extends Item implements DyeableItem
 			tooltip.add(Text.translatable(Hookshot.MOD_ID + ".modifier.range").formatted(Formatting.GRAY));
 		if(UpgradesHelper.hasBleedUpgrade(stack))
 			tooltip.add(Text.translatable(Hookshot.MOD_ID + ".modifier.bleed").formatted(Formatting.GRAY));
+		if(UpgradesHelper.hasVineUpgrade(stack))
+			tooltip.add(Text.translatable(Hookshot.MOD_ID + ".modifier.vinelike").formatted(Formatting.GRAY));
 	}
 
 	@Override

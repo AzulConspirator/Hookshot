@@ -34,4 +34,8 @@ public class UpgradesHelper {
 	public static boolean hasBleedUpgrade(ItemStack stack) {
 		return stack.hasNbt() && stack.getNbt().getBoolean("hasBleedUpgrade");
 	}
+
+	public static boolean hasVineUpgrade(ItemStack stack) {
+		return stack.hasNbt() && stack.getNbt().getBoolean("hasVineUpgrade");
+	}
 }

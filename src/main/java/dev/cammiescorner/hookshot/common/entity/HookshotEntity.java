@@ -102,15 +102,48 @@ public class HookshotEntity extends PersistentProjectileEntity {
 							origin = owner;
 						}
 
-						double brakeZone = (6D * ((HookshotConfig.quickModAffectsPullSpeed ? maxSpeed : HookshotConfig.defaultMaxSpeed) / HookshotConfig.defaultMaxSpeed));
-						double pullSpeed = (HookshotConfig.quickModAffectsPullSpeed ? maxSpeed : HookshotConfig.defaultMaxSpeed) / 6D;
-						Vec3d distance = origin.getPos().subtract(target.getPos().add(0, target.getHeight() / 2, 0));
-						Vec3d motion = distance.normalize().multiply(distance.length() < brakeZone && !UpgradesHelper.hasAutomaticUpgrade(stack) ? (pullSpeed * distance.length()) / brakeZone : pullSpeed);
+						double brakeZone;
+						double pullSpeed;
+						Vec3d distance;
+						Vec3d motion;
+						
+						if (UpgradesHelper.hasVineUpgrade(stack)) 
+						{
+							float currentDistance = target.distanceTo(origin);
+							boolean belowHookshot = target.getY() < origin.getY();
+							double ySpringStiffness, xzSpringStiffness;
+							ySpringStiffness = xzSpringStiffness = 0.25D;
 
-						if(Math.abs(distance.y) < 0.1D)
+							// Slow down players once close to the hook
+							if (currentDistance < 4) {
+								ySpringStiffness = xzSpringStiffness = 0.09D;
+							}
+							// increase Y stiffness when descending at large speeds
+							if (belowHookshot && target.getVelocity().getY() < -1.5) {
+								ySpringStiffness = 1.5D;
+							}
+							if (belowHookshot && target.getVelocity().getY() < -2) {
+								ySpringStiffness = 4.0D;
+							}
+							// Copied from lead code, same result as attaching a lead from hookshot to player
+							double xDis = (origin.getX() - target.getX()) / (double)currentDistance;
+							double yDis = (origin.getY() - target.getY()) / (double)currentDistance;
+							double zDis = (origin.getZ() - target.getZ()) / (double)currentDistance;
+							motion = target.getVelocity().add(Math.copySign(xDis * xDis * xzSpringStiffness, xDis), Math.copySign(yDis * yDis * ySpringStiffness, yDis), Math.copySign(zDis * zDis * xzSpringStiffness, zDis));
+						}
+						else 
+						{
+							brakeZone = (6D * ((HookshotConfig.quickModAffectsPullSpeed ? maxSpeed : HookshotConfig.defaultMaxSpeed) / HookshotConfig.defaultMaxSpeed));
+							pullSpeed = (HookshotConfig.quickModAffectsPullSpeed ? maxSpeed : HookshotConfig.defaultMaxSpeed) / 6D;
+							distance = origin.getPos().subtract(target.getPos().add(0, target.getHeight() / 2, 0));
+							motion = distance.normalize().multiply(distance.length() < brakeZone && !UpgradesHelper.hasAutomaticUpgrade(stack) ? (pullSpeed * distance.length()) / brakeZone : pullSpeed);
+							
+							if(Math.abs(distance.y) < 0.1D)
 							motion = new Vec3d(motion.x, 0, motion.z);
-						if(new Vec3d(distance.x, 0, distance.z).length() < new Vec3d(target.getWidth() / 2, 0, target.getWidth() / 2).length() / 1.4)
+							if(new Vec3d(distance.x, 0, distance.z).length() < new Vec3d(target.getWidth() / 2, 0, target.getWidth() / 2).length() / 1.4)
 							motion = new Vec3d(0, motion.y, 0);
+						}
+						
 
 						if(HookshotConfig.hookshotCancelsFallDamage)
 							target.fallDistance = 0;

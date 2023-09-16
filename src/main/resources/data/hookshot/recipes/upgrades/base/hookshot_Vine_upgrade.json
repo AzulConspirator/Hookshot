@@ -1,0 +1,20 @@
+{
+  "type": "hookshot:smithing",
+  "template":
+  {
+    "item": "minecraft:iron_ingot"
+  },
+  "base":
+  {
+    "item": "hookshot:hookshot"
+  },
+  "addition":
+  {
+    "item": "minecraft:vine"
+  },
+  "result":
+  {
+    "item": "hookshot:hookshot",
+    "nbt": "hasVineUpgrade"
+  }
+}

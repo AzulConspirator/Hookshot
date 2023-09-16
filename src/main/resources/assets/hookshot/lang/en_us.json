@@ -1,5 +1,4 @@
 {
-  // ModMenu
   "hookshot.midnightconfig.title": "Hookshot",
   "hookshot.midnightconfig.useClassicHookshotLogic": "Use Old Hookshot Fire/Retract Logic",
   "hookshot.midnightconfig.unhookableBlacklist": "Unhookable Tag Acts Like Blacklist",
@@ -12,14 +11,11 @@
   "hookshot.midnightconfig.durabilityMultiplier": "Durability Upgrade Multiplier",
   "hookshot.midnightconfig.defaultMaxDurability": "Hookshot Durability",
   "hookshot.midnightconfig.hookshotRepairItem": "Item to Use For Repairing Hookshot",
-
-  // Items
+  
   "item.hookshot.hookshot": "Hookshot",
 
-  // Entities
   "entity.hookshot.hookshot": "Hookshot",
 
-  // Modifiers
   "hookshot.modifier.durability": "Durability",
   "hookshot.modifier.automatic": "Automatic",
   "hookshot.modifier.swinging": "Swinging",
@@ -28,7 +24,7 @@
   "hookshot.modifier.quick": "Quick",
   "hookshot.modifier.range": "Range",
   "hookshot.modifier.bleed": "Bleed",
+  "hookshot.modifier.vinelike": "Vine Like",
 
-  // Subtitles
   "subtitles.hookshot.hookshot_reel": "Hookshot Reel"
 }
